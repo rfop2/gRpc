@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option go_package = "/pb";
+
+message factorialRequest {
+  string numero = 1;
+}
+
+message factorialResponse {
+  string resultado = 1;
+}
+
+service factorialService {
+  rpc Factorial(factorialRequest) returns (factorialResponse){}
+}

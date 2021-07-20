@@ -6,6 +6,7 @@ import (
 	"project-go/pb"
 	"google.golang.org/grpc"
 	"log"
+	"time"
 )
 
 func main() {
@@ -18,9 +19,16 @@ func main() {
 	}
 	defer cc.Close()
 
+	start := time.Now()
+
 	client := pb.NewFactorialServiceClient(cc)
-	request := &pb.FactorialRequest{Numero: "5"}
+	request := &pb.FactorialRequest{Numero: "20"}
 
 	resp, _ := client.Factorial(context.Background(), request)
+	end := time.Now()
+
 	fmt.Printf("Resultado recebido => [%v]", resp.Resultado)
+	
+	tempo := end.Sub(start)
+	fmt.Println("tempo: ", tempo.Seconds())
 }
